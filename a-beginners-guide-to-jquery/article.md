@@ -201,14 +201,27 @@ $("li").click(function(event){ console.log(this) })
 
 There is [a list of all of the events][1] in the jQuery docs.
 
-It’s important to note that the `on` method works a bit differently to the wrapper methods, so the following two statements are not equivalent:
+It’s important to note that the `on` method works a bit differently to the wrapper methods, when you pass it second argument - a selector.
 
+~~~ javascript
+$("body").on("click", "li", handler);
+~~~
+
+This is called event delegation. It assigns a listener to a single parent and checks if the child element clicked matches the selector you provide. This allows to watch all DOM elements, regardless of when they were added to the DOM. 
+
+So the following two statements are equivalent:
 ~~~ javascript
 $("li").click(handler);
 $("li").on("click", handler);
 ~~~
 
-The first statement uses the `click` method, which only applies to list items that exist when `click` is invoked. The second statement uses the `on` method, which applies to all list items, even those that are created after `on` is invoked. This is important when creating elements dynamically. For example, if you append new items to a list, `on` will handle clicks on all of the items, while wrapper methods like `click` will only handle events on the items that existed when the method was invoked.
+However, these are not equivalent:
+~~~ javascript
+$("li").click(handler);
+$("body").on("click", "li", handler);
+~~~
+
+The first statement uses the `click` method, which only applies to list items that exist when `click` is invoked. The second statement uses the `on` method for parent element with child selector, which applies to all list items, even those that are created after `on` is invoked. This is important when creating elements dynamically. For example, if you append new items to a list, `on` + `selector` will handle clicks on all of the items, while wrapper methods like `click` or `on` without selector will only handle events on the items that existed when the method was invoked.
 
 [1]: https://api.jquery.com/category/events
 

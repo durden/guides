@@ -201,27 +201,14 @@ $("li").click(function(event){ console.log(this) })
 
 There is [a list of all of the events][1] in the jQuery docs.
 
-It’s important to note that the `on` method works a bit differently to the wrapper methods, when you pass it second argument - a selector.
+It’s important to note that the `on` method works a bit differently to the wrapper methods, so the following two statements are not equivalent:
 
-~~~ javascript
-$("body").on("click", "li", handler);
-~~~
-
-This is called event delegation. It assigns a listener to a single parent and checks if the child element clicked matches the selector you provide. This allows to watch all DOM elements, regardless of when they were added to the DOM. 
-
-So the following two statements are equivalent:
 ~~~ javascript
 $("li").click(handler);
 $("li").on("click", handler);
 ~~~
 
-However, these are not equivalent:
-~~~ javascript
-$("li").click(handler);
-$("body").on("click", "li", handler);
-~~~
-
-The first statement uses the `click` method, which only applies to list items that exist when `click` is invoked. The second statement uses the `on` method for parent element with child selector, which applies to all list items, even those that are created after `on` is invoked. This is important when creating elements dynamically. For example, if you append new items to a list, `on` + `selector` will handle clicks on all of the items, while wrapper methods like `click` or `on` without selector will only handle events on the items that existed when the method was invoked.
+The first statement uses the `click` method, which only applies to list items that exist when `click` is invoked. The second statement uses the `on` method, which applies to all list items, even those that are created after `on` is invoked. This is important when creating elements dynamically. For example, if you append new items to a list, `on` will handle clicks on all of the items, while wrapper methods like `click` will only handle events on the items that existed when the method was invoked.
 
 [1]: https://api.jquery.com/category/events
 
@@ -272,7 +259,5 @@ Now, let’s quickly reiterate a few key points to keep in mind when you’re st
 The features covered here are what you need to get up and running with jQuery, and to understand its unique approach to front-end web development. We haven’t covered jQuery's AJAX support, the animation features or how to define and use plugins--however, you should definitely look into these things as you come across a need for them. Above all else, remember that jQuery has a huge community and ecosystem, it’s fun to use, and it makes such light work of browser programming that a framework is often redundant. Every front-end dev should have it in their tool box.
 
 ### About the author:
-
-![](https://avatars0.githubusercontent.com/u/7561668?v=3&s=80)
 
 [Carl](https://hackhands.com/carlsmith/) is a self-taught, full-stack web developer. He began using Python back in 2009, mainly for scripting cloud services, and he is especially familiar with Google App Engine. He has extensive experience of browser technologies, is a big fan of jQuery, and a bit of a CoffeeScript evangelist. Carl has led the development of commercial applications, and he has published a couple of open source projects too.

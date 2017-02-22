@@ -1,4 +1,4 @@
-The 'watch' feature of modern debuggers allows a developer to see when a
+The watch feature of modern debuggers allows a developer to see when a
 variable changes state. I use this feature a lot when doing small debugging
 sprints. Unfortunately, using it requires opening up a big
 [IDE](http://en.wikipedia.org/wiki/Integrated_development_environment) like
